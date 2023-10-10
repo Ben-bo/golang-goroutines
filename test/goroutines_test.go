@@ -1,8 +1,9 @@
-package test
+package testpackage
 
 import (
-	"fmt"
 	"testing"
+
+	"github.com/Ben-bo/golang-goroutines/src/channels"
 )
 
 func hello(name string) string {
@@ -12,25 +13,16 @@ func TestHello(t *testing.T) {
 	go hello("test")
 }
 
-func reciveData(ch <-chan string) {
-
-	fmt.Println(<-ch)
-}
-func sendData(ch chan<- string, data string) {
-	ch <- data
-}
-
 func TestCreateChannel(t *testing.T) {
 	channel := make(chan string)
-
+	defer close(channel)
 	// go hello("beni")
-	go reciveData(channel)
-	go sendData(channel, "Beni")
+	go channels.ReciveData(channel)
+	go channels.SendData(channel, "Beni")
 
 	// channel <- "beni"
 	// dataChannel := <-channel
 
 	// fmt.Println(dataChannel)
 
-	close(channel)
 }
