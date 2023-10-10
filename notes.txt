@@ -1,0 +1,5 @@
+=== sending data to channel ===
+channel <- data
+
+=== recieving data from channel ===
+data <- channel
